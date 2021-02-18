@@ -50,6 +50,11 @@ betweenness_centrality_g = betweenness_centrality_parallel(G, 50)
 betweenness_centrality_wg = betweenness_centrality_parallel(WG, 50)
 betweenness_centrality_sg = betweenness_centrality_parallel(SG, 50)
 
+# compute the clustering coefficient for all the nodes of all the graphs
+clustering_g = nx.clustering(G)
+clustering_wg = nx.clustering(WG)
+clustering_sg = nx.clustering(SG)
+
 f = open("../data/betweenness_centrality_g.pkl","wb")
 pickle.dump(betweenness_centrality_g,f)
 f.close()
@@ -60,4 +65,16 @@ f.close()
 
 f = open("../data/betweenness_centrality_sg.pkl","wb")
 pickle.dump(betweenness_centrality_sg,f)
+f.close()
+
+f = open("../data/clustering_g.pkl","wb")
+pickle.dump(clustering_g,f)
+f.close()
+
+f = open("../data/clustering_wg.pkl","wb")
+pickle.dump(clustering_wg,f)
+f.close()
+
+f = open("../data/clustering_sg.pkl","wb")
+pickle.dump(clustering_sg,f)
 f.close()
