@@ -75,3 +75,42 @@ for author1 in authors:
 SG = nx.from_scipy_sparse_matrix(simadj)
 SG = nx.relabel_nodes(SG, inv_nodes)
 nx.write_multiline_adjlist(SG, '../data/sim_collaboration_network.adjlist')
+
+
+
+# Paper and weighted paper graph
+# read the file to create a dictionary with paperId as key and paper embedding as value
+f = open("../data/paper_embeddings.txt","r")
+papers = {}
+s = ""
+pattern = re.compile(r'(\s){2,}')
+for l in f:
+    if(":" in l and s!=""):
+        papers[s.split(":")[0].strip()] = np.array(ast.literal_eval(re.sub(pattern, ',', s.split(":")[1]).replace(" ",",")))
+        s = l.replace("\n","")
+    else:
+        s = s+" "+l.replace("\n","")
+    
+f.close()
+
+# normalization of each embedding to use the cosinus similarity
+idx_paper = list(papers.keys())
+adj_paper =  []
+for i in idx_paper:
+    adj_paper.append(list(papers[i]/np.linalg.norm(papers[i])))
+adj_paper = np.array(adj_paper)
+
+# Creation de graph using the cosinus similarity, we have un edge if:  
+# The cosinus similarity of 2 papers is higher than the mean + 4*std 
+gr_paper = open('../data/graph_paper.edgelist','w')
+w_gr_paper = open('../data/weighted_graph_paper.edgelist','w')
+for i,idx in enumerate(idx_paper):
+    row = adj_paper.dot(adj_paper[i])
+    mm=row.mean()
+    ss =row.std()
+    nn = np.argwhere(row>mm+4*ss).ravel()
+    for j in nn:
+        gr_paper.write("%i %i\n" % (int(idx),int(idx_paper[j])))
+        w_gr_paper.write("%i %i %.5f\n" % (int(idx),int(idx_paper[j]),row[j]))
+gr_paper.close()
+w_gr_paper.close()
