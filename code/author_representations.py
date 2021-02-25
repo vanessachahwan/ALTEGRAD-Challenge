@@ -61,7 +61,7 @@ most_popular = False
 
 # the author representation is set to be most popular of its papers' representations
 pattern = re.compile(r'(,){2,}')
-df = open("author_embedding_most_popular_64.csv","w")
+df = open("author_embedding_64.csv","w")
 for author in d:
     
     # if you wish to have that the authors'vector corresponds to the vector of its most popular paper
@@ -84,7 +84,7 @@ for author in d:
      
     
     if mean:
-        v = np.zeros(256)
+        v = np.zeros(64)
         c = 0
         for paper in d[author]:
             try:
