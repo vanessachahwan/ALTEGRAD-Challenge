@@ -24,15 +24,15 @@ node2vec.train(epochs=100)
 node2vec.wv.save_word2vec_format('../data/node2vec_wg.nodevectors')
 
 # node2vec SG
-edges_list = [(str(e[0]), str(e[1]), SG[e[0]][e[1]]["weight"]) for e in SG.edges]
-g = Graph(edges_list, directed=False, weighted=True)
+edges_list = [(str(e[0]), str(e[1])) for e in SG.edges]
+g = Graph(edges_list, directed=False, weighted=False)
 node2vec = Node2Vec(g, dim=64, walk_length=15, context=10, p=1, q=0.5, workers=10)
 node2vec.train(epochs=100)
 node2vec.wv.save_word2vec_format('../data/node2vec_sg.nodevectors')
 
 # node2vec PG
-edges_list = [(str(e[0]), str(e[1]), PG[e[0]][e[1]]["weight"]) for e in PG.edges]
-g = Graph(edges_list, directed=False, weighted=True)
+edges_list = [(str(e[0]), str(e[1])) for e in PG.edges]
+g = Graph(edges_list, directed=False, weighted=False)
 node2vec = Node2Vec(g, dim=64, walk_length=15, context=10, p=1, q=0.5, workers=10)
 node2vec.train(epochs=100)
 node2vec.wv.save_word2vec_format('../data/node2vec_pg.nodevectors')
