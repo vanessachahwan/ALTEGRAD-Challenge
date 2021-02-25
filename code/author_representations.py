@@ -63,15 +63,16 @@ most_popular = False
 pattern = re.compile(r'(,){2,}')
 df = open("author_embedding_most_popular_64.csv","w")
 for author in d:
+    
     # if you wish to have that the authors'vector corresponds to the vector of its most popular paper
     if most_popular:
         v = most_popular_paper(author)
+    
     
     # if you wish to have that the authors'vector corresponds to the vector of its weighted mean
     if weighted_mean:
         v = weighted_mean(author)
         
-    df.write(author+","+",".join(map(lambda x:"{:.8f}".format(round(x, 8)), v))+"\n"
         
     if sum_:
     v = np.zeros(64)
@@ -81,6 +82,7 @@ for author in d:
         except:
             continue
      
+    
     if mean:
         v = np.zeros(256)
         c = 0
