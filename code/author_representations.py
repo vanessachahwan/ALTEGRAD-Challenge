@@ -58,6 +58,9 @@ weighted_mean = False
 mean = False
 most_popular = False
 
+# To choose between NAN or vector of zero:
+NAN = False
+
 
 # the author representation is set to be most popular of its papers' representations
 pattern = re.compile(r'(,){2,}')
@@ -94,6 +97,10 @@ for author in d:
                 continue
         if(c==0):
             c=1
+       
+    if NAN:
+        if not v.any():
+        v = np.nan * np.ones(64)
     
     df.write(author+","+",".join(map(lambda x:"{:.8f}".format(round(x, 8)), v))+"\n")
     
