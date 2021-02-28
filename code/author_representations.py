@@ -77,7 +77,7 @@ NAN = False
 
 # the author representation is set to be the sum of its papers' representations
 pattern = re.compile(r'(,){2,}')
-df = open("author_embedding_64.csv","w")
+df = open("../data/author_embedding_64.csv","w")
 for author in d:
     
     # if you wish to have that the authors'vector corresponds to the vector of its most popular paper
@@ -91,12 +91,12 @@ for author in d:
         
         
     if sum_:
-    v = np.zeros(64)
-    for paper in d[author]:
-        try:
-            v += papers[paper]
-        except:
-            continue
+        v = np.zeros(64)
+        for paper in d[author]:
+            try:
+                v += papers[paper]
+            except:
+                continue
      
     
     if mean:
@@ -113,7 +113,7 @@ for author in d:
        
     if NAN:
         if not v.any():
-        v = np.nan * np.ones(64)
+            v = np.nan * np.ones(64)
     
     df.write(author+","+",".join(map(lambda x:"{:.8f}".format(round(x, 8)), v))+"\n")
     
