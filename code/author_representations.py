@@ -65,7 +65,7 @@ def weighted_mean(author):
     output = output / (sum_of_popularity + epsilon)
     return output
 
-#choose your papor embedding :
+#choose your paper embedding :
 sum_ = True
 weighted_mean = False
 mean = False
