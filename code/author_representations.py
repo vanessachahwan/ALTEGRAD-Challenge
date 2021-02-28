@@ -14,6 +14,19 @@ for l in f:
     d[l.split(":")[0]] = auth_paps
 f.close()
 
+# read the embeddings of each paper
+f = open("../data/paper_embeddings.txt","r")
+papers = {}
+s = ""
+pattern = re.compile(r'(\s){2,}')
+for l in f:
+    if(":" in l and s!=""):
+        papers[s.split(":")[0]] = np.array(ast.literal_eval(re.sub(pattern, ',', s.split(":")[1]).replace(" ",",")))
+        s = l.replace("\n","")
+    else:
+        s = s+" "+l.replace("\n","")
+f.close()
+
 def most_popular_paper(author):
     most_popular = np.zeros(64)
     best_popularity = 0
@@ -62,7 +75,7 @@ most_popular = False
 NAN = False
 
 
-# the author representation is set to be most popular of its papers' representations
+# the author representation is set to be the sum of its papers' representations
 pattern = re.compile(r'(,){2,}')
 df = open("author_embedding_64.csv","w")
 for author in d:
