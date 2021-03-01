@@ -7,10 +7,10 @@ import ast
 import re
 
 node2vec_input = "../data/node2vec_sg.nodevectors"
-node2vec_output = "../data/author_node2vec_sg.csv"
+node2vec_output = "../data/author_node2vec_sg_nan.csv"
 
 # read the file to create a list of authors
-G = nx.read_edgelist('collaboration_network.edgelist', delimiter=' ', nodetype=int)
+G = nx.read_edgelist('../data/collaboration_network.edgelist', delimiter=' ', nodetype=int)
 
 authors = list(G.nodes())
 
@@ -29,12 +29,12 @@ for author in authors:
     try:
         v = embeddings[str(author)]
     except:
-        continue
+        v = np.zeros(64)
        
     if NAN:
         if not v.any():
             v = np.nan * np.ones(64)
     
-    df.write(str(author)+","+",".join(map(lambda x:"{:.16f}".format(x), v))+"\n")
+    df.write(str(author)+","+",".join(map(lambda x:"{:.8f}".format(x), v))+"\n")
     
 df.close()
