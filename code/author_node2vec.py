@@ -2,7 +2,6 @@ import os
 import pandas as pd
 import numpy as np
 from gensim.models import KeyedVectors
-import matplotlib.pyplot as plt
 import ast
 import re
 
