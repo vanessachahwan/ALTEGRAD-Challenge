@@ -4,8 +4,7 @@
 
 
 <p align="center">
-  <img src="https://media.giphy.com/media/cInyJSYeuHw1Sduv8X/giphy.gif" width="400" title="team BVM">
-![](https://media.giphy.com/media/cInyJSYeuHw1Sduv8X/giphy.gif)
+  <gif src="https://media.giphy.com/media/cInyJSYeuHw1Sduv8X/giphy.gif" width="400" title="team BVM">
 </p>
 
 * Bertrand PATUREL
