@@ -47,10 +47,10 @@ for i in dic:
 # learns the embeddings of each abstract 
 tagged_data = [TaggedDocument(d, [i]) for i, d in enumerate(doc)]
 del doc
-model = Doc2Vec(tagged_data, vector_size = dim, window = 5, min_count = 2, epochs = 100, workers=10)
+model = Doc2Vec(tagged_data, vector_size = dim, window = 5, dm = 1, min_count = 2, epochs = 100, workers=10)
 
 # store the embeddings in "paperID":array format
-f = open("../data/paper_embeddings.txt","w")
+f = open("../data/paper_embeddings_64_dm.txt","w")
 for tid in dic:
     sentence = dic[tid]
     f.write(str(tid)+":"+np.array2string(model.infer_vector(sentence), formatter={'float_kind':lambda x: "%.8f" % x})+"\n")    
