@@ -19,10 +19,10 @@ This indicator depends on two parameters:
 - The number of articles published by the researcher
 - The number of citations of each article
 
-A scientist has "index h if h of his or her Np papers haveat least h citations each and the other (Np-h) papers have hcitations each"
+A scientist has "index h if h of his or her Np papers have at least h citations each and the other (Np-h) papers have h citations each"
 
 The main purprose of this project is to predict the h-index given:
-- A graph indicating which authors have published a papertogether.
+- A graph indicating which authors have published a paper together.
 - The abstracts of several papers in a database.
 
 # Main Model
