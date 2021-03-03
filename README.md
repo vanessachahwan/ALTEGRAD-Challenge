@@ -32,7 +32,7 @@ The main purprose of this project is to predict the h-index given:
 
 
 # Getting started
-## Install the requirements
+## Run our model
 
 To execute our model you have to run the following line in the "code" folder.
 
