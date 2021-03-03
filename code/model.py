@@ -200,7 +200,7 @@ reg.fit(X_train, y_train)
 y_pred = reg.predict(X_test)
 
 
-# post-processing: take nearest integer value and bountd it
+# post-processing: take nearest integer value and bound it
 y_pred = np.round(y_pred)
 
 for i in range(len(X_test)):
