@@ -2,9 +2,13 @@
 **Team BVM :**
 
 
-![* Bertrand PATUREL
+
+<p align="center">
+![](https://media.giphy.com/media/cInyJSYeuHw1Sduv8X/giphy.gif)
+* Bertrand PATUREL
 * Vanessa CHAHWAN 
-* Martin BRICENO ](https://media.giphy.com/media/cInyJSYeuHw1Sduv8X/giphy.gif)
+* Martin BRICENO 
+</p>
 
 <p align="center">
   <img src="https://www.smartdatacollective.com/wp-content/uploads/2018/03/Natural-Language-Processing-NLP-AI-780x445.jpg.webp" width="400" title="suicide-awareness">
