@@ -1,9 +1,9 @@
 # ALTEGRAD Challenge: H Index Prediction
-**Team BVM :**
+**Team BMV :**
 
 * Bertrand PATUREL
-* Vanessa CHAHWAN 
 * Martin BRICENO 
+* Vanessa CHAHWAN 
 
 <p align="center">
   <img src="https://www.smartdatacollective.com/wp-content/uploads/2018/03/Natural-Language-Processing-NLP-AI-780x445.jpg.webp" width="400" title="NLP">
