@@ -1,8 +1,5 @@
 # ALTEGRAD Challenge: H Index Prediction
 **Team BVM :**
-<p align="center">
-  <img src="https://media.giphy.com/media/cInyJSYeuHw1Sduv8X/giphy.gif" alt="this slowpoke moves"  width=250/>
-</p>
 
 * Bertrand PATUREL
 * Vanessa CHAHWAN 
