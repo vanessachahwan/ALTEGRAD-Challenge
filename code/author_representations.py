@@ -14,7 +14,7 @@ for l in f:
 f.close()
 
 # read the embeddings of each paper
-f = open("../data/paper_embeddings.txt","r")
+f = open("../data/paper_embeddings_64_dm.txt","r")
 papers = {}
 s = ""
 pattern = re.compile(r'(\s){2,}')
@@ -76,7 +76,7 @@ NAN = False
 
 # the author representation is set to be the sum of its papers' representations
 pattern = re.compile(r'(,){2,}')
-df = open("../data/author_embedding_64.csv","w")
+df = open("../data/author_embedding_64_dm.csv","w")
 for author in d:
     
     # if you wish to have that the authors'vector corresponds to the vector of its most popular paper
