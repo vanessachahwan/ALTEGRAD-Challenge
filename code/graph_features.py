@@ -9,7 +9,7 @@ import pickle
 # load the three graphs
 G = nx.read_edgelist('../data/collaboration_network.edgelist', delimiter=' ', nodetype=int)
 WG = nx.read_edgelist("../data/weighted_collaboration_network.edgelist", nodetype=int, data=(("weight", float),))
-SG = nx.read_multiline_adjlist("../data/sim_collaboration_network.adjlist", nodetype=int)
+SG = nx.read_multiline_adjlist("../data/author_similarity_network.adjlist", nodetype=int)
 
 def chunks(l, n):
     """Divide a list of nodes `l` in `n` chunks"""
@@ -45,13 +45,11 @@ def betweenness_centrality_parallel(G, processes=None):
             bt_c[n] += bt[n]
     return bt_c
 
-# compute the betweenness centrality for all the graphs
+# compute the betweenness centrality for all graphs G and WG
 betweenness_centrality_g = betweenness_centrality_parallel(G, 50)
 betweenness_centrality_wg = betweenness_centrality_parallel(WG, 50)
-betweenness_centrality_sg = betweenness_centrality_parallel(SG, 50)
 
-# compute the clustering coefficient for all the nodes of all the graphs
-clustering_g = nx.clustering(G)
+# compute the clustering coefficient for all the nodes of the graphs WG and SG
 clustering_wg = nx.clustering(WG)
 clustering_sg = nx.clustering(SG)
 
@@ -61,14 +59,6 @@ f.close()
 
 f = open("../data/betweenness_centrality_wg.pkl","wb")
 pickle.dump(betweenness_centrality_wg,f)
-f.close()
-
-f = open("../data/betweenness_centrality_sg.pkl","wb")
-pickle.dump(betweenness_centrality_sg,f)
-f.close()
-
-f = open("../data/clustering_g.pkl","wb")
-pickle.dump(clustering_g,f)
 f.close()
 
 f = open("../data/clustering_wg.pkl","wb")
