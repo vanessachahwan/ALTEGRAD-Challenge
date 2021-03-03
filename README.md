@@ -33,6 +33,14 @@ The main purprose of this project is to predict the h-index given:
 
 
 # Getting started
+## Required files
+
+Before running the model it is advisable to download some files necessary for its execution. This will save you time since the creation of networks and the extraction of some features is very slow. Here is the download link:
+
+> www.kaggle.com/dataset/def482c59cd5a8ec65e48fef7a67002640d742dfd0e8a389b86421e28356171a
+
+Once downloaded, deposit these files in the ```/code/data/``` folder.
+
 ## Run our model
 
 To execute our model you have to run the following line in the "code" folder.
