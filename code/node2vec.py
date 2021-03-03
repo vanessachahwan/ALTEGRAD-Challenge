@@ -7,10 +7,10 @@ from fastnode2vec import Node2Vec, Graph
 # read weighted collaboration graph
 WG = nx.read_edgelist("../data/weighted_collaboration_network.edgelist", nodetype=int, data=(("weight", float),))
 
-# read similarity graph
-SG = nx.read_multiline_adjlist("../data/sim_collaboration_network.adjlist", nodetype=int)
+# read author similarity graph
+SG = nx.read_multiline_adjlist("../data/author_similarity_network.adjlist", nodetype=int)
 
-# read weighted collaboration paper graph
+# read paper similarity graph
 WPG = nx.read_edgelist("../data/weighted_graph_paper.edgelist", nodetype=int, data=(("weight", float),))
 
 # read collaboration paper graph
