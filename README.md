@@ -47,13 +47,21 @@ To execute our model you have to run the following line in the "code" folder.
 
 
 > ```python paper_representations.py```
+
 > ```python author_representations.py```
+
 > ```python create_graphs.py```
+
 > ```python papers_features.py```
+
 > ```python graph_features.py```
+
 > ```python node2vec.py```
+
 > ```python author_node2vec.py```
+
 > ```python preprocessing_node2vec.py```
+
 > ```python model.py```
 
 <p align="center">
