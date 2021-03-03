@@ -5,6 +5,7 @@ import pickle
 from lightgbm import LGBMRegressor
 from sklearn.model_selection import cross_val_score
 from gensim.models import KeyedVectors
+from sklearn.compose import TransformedTargetRegressor
 
 
 # read training data
@@ -181,7 +182,7 @@ for i,row in df_test.iterrows():
     X_test[i,17+5*n_dim:] = text_embeddings_dbow[text_embeddings_dbow["authorID"] == node].iloc[:,1:]
 
 
-# regressor model
+# Model 1
 reg = LGBMRegressor(objective='mae',
                     boosting_type='dart',
                     colsample_bytree = 0.9365930147015064,
@@ -190,9 +191,27 @@ reg = LGBMRegressor(objective='mae',
                     n_estimators = 100000,
                     num_leaves = 32,
                     reg_alpha = 0.7886706622516692,
-                    reg_lambda = 0.510000982102748,
-                    subsample = 0.5044671893327269, 
+                    reg_lambda = 0.9610000982102748,
+                    subsample = 0.9044671893327269, 
                     n_jobs=1)
+
+
+#Model 2
+# regaux = LGBMRegressor(objective='mae',
+#                        colsample_bytree = 0.8194330336006158,
+#                        learning_rate = 0.010467484476003708,
+#                        max_depth = 19,
+#                        n_estimators = 50000,
+#                        num_leaves = 32,
+#                        reg_alpha = 0.789679180967437,
+#                        reg_lambda = 0.3377356252520094,
+#                        subsample = 0.9865966548486782, 
+#                        n_jobs=1)
+
+
+# reg = TransformedTargetRegressor(regressor=regaux,
+#                                  func=np.log1p,
+#                                  inverse_func=np.expm1)
 
 
 # training the regressor and making a prediction
