@@ -45,8 +45,17 @@ Once downloaded, deposit these files in the ```/data/``` folder.
 
 To execute our model you have to run the following line in the "code" folder.
 
+
+> ```python paper_representations.py```
+> ```python author_representations.py```
+> ```python create_graphs.py```
+> ```python papers_features.py```
+> ```python graph_features.py```
+> ```python node2vec.py```
+> ```python author_node2vec.py```
+> ```python preprocessing_node2vec.py```
 > ```python model.py```
 
 <p align="center">
-  <img src="https://grandes-ecoles.studyrama.com/sites/default/files/styles/content/public/institut-polytechnique-de-paris.jpeg?itok=_Puxulb6" width="300" title="suicide-awareness">
+  <img src="https://grandes-ecoles.studyrama.com/sites/default/files/styles/content/public/institut-polytechnique-de-paris.jpeg?itok=_Puxulb6" width="300" title="altegrad challenge">
 </p>
