@@ -7,7 +7,7 @@ import ast
 import re
 
 node2vec_input = "../data/node2vec_sg.nodevectors"
-node2vec_output = "../data/author_node2vec_sg_nan.csv"
+node2vec_output = "../data/author_node2vec_sg.csv"
 
 # read the file to create a list of authors
 G = nx.read_edgelist('../data/collaboration_network.edgelist', delimiter=' ', nodetype=int)
