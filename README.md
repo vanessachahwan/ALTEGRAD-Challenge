@@ -39,7 +39,7 @@ Before running the model it is advisable to download some files necessary for it
 
 > www.kaggle.com/dataset/def482c59cd5a8ec65e48fef7a67002640d742dfd0e8a389b86421e28356171a
 
-Once downloaded, deposit these files in the ```/code/data/``` folder.
+Once downloaded, deposit these files in the ```/data/``` folder.
 
 ## Run our model
 
