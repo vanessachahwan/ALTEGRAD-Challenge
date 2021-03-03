@@ -27,8 +27,8 @@ inv_nodes = {v: k for k, v in nodes.items()}
 authors = [int(a) for a in author_paper.keys()]
 papers = [int(p) for ps in author_paper.values() for p in ps]
 
-# Weighted graph
-# create weighted graph
+# Weighted collaboration graph
+# create weighted collaboration graph
 adj = nx.adjacency_matrix(G)
 wadj = 0.5*adj.tolil()
 for a in authors:
@@ -46,17 +46,18 @@ WG = nx.relabel_nodes(WG, inv_nodes)
 nx.write_edgelist(WG, '../data/weighted_collaboration_network.edgelist', data=["weight"])
 
 
-# Similarity graph
+# Author similarity graph
 # read embeddings of abstracts
-text_embeddings = pd.read_csv("../data/author_embedding_64.csv", header=None)
+text_embeddings = pd.read_csv("../data/author_embedding_64_dm.csv", header=None)
 text_embeddings = text_embeddings.rename(columns={0: "authorID"})
+text_embeddings = text_embeddings.fillna(0)
 
 # create dictionnary of embeddings
 embs = {}
 for author in authors:
     embs[author] = text_embeddings[text_embeddings["authorID"] == author]
 
-# create similarity graph
+# create author similarity graph
 n = G.number_of_nodes()
 simadj = sp.sparse.csr_matrix((n,n)).tolil()
 for author1 in authors:
@@ -78,9 +79,9 @@ nx.write_multiline_adjlist(SG, '../data/sim_collaboration_network.adjlist')
 
 
 
-# Paper and weighted paper graph
+# Paper and paper similarity graph
 # read the file to create a dictionary with paperId as key and paper embedding as value
-f = open("../data/paper_embeddings.txt","r")
+f = open("../data/paper_embeddings_64_dm.txt","r")
 papers = {}
 s = ""
 pattern = re.compile(r'(\s){2,}')
@@ -100,7 +101,7 @@ for i in idx_paper:
     adj_paper.append(list(papers[i]/np.linalg.norm(papers[i])))
 adj_paper = np.array(adj_paper)
 
-# Creation de graph using the cosinus similarity, we have un edge if:  
+# Creation of graph using the cosinus similarity, we have an edge if:  
 # The cosinus similarity of 2 papers is higher than the mean + 4*std 
 gr_paper = open('../data/graph_paper.edgelist','w')
 w_gr_paper = open('../data/weighted_graph_paper.edgelist','w')
