@@ -64,6 +64,8 @@ To execute our model you have to run the following line in the "code" folder.
 
 > ```python model.py```
 
+**If you have downloaded the files from the previous step you only need to execute the last command, the rest is no longer necessary.**
+
 <p align="center">
   <img src="https://grandes-ecoles.studyrama.com/sites/default/files/styles/content/public/institut-polytechnique-de-paris.jpeg?itok=_Puxulb6" width="300" title="altegrad challenge">
 </p>
