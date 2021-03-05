@@ -1,0 +1,11 @@
+numpy
+pandas
+scipy
+networkx
+fastnode2vec
+kaggle
+gensim
+scikit-learn
+lightgbm
+nltk
+torch

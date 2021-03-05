@@ -7,9 +7,9 @@ from sklearn.model_selection import cross_val_score
 from gensim.models import KeyedVectors
 from sklearn.compose import TransformedTargetRegressor
 
-
 # read training data
-df_train = pd.read_csv('../data/train.csv', dtype={'authorID': np.int64, 'h_index': np.float32})
+df_train = pd.read_csv('../data/train.csv',
+                       dtype={'authorID': np.int64, 'h_index': np.float32})
 n_train = df_train.shape[0]
 
 
@@ -19,15 +19,18 @@ n_test = df_test.shape[0]
 
 
 # read collaboration graph
-G = nx.read_edgelist('../data/collaboration_network.edgelist', delimiter=' ', nodetype=int)
+G = nx.read_edgelist('../data/collaboration_network.edgelist',
+                     delimiter=' ', nodetype=int)
 
 
 # read weighted collaboration graph
-WG = nx.read_edgelist("../data/weighted_collaboration_network.edgelist", nodetype=int, data=(("weight", float),))
+WG = nx.read_edgelist("../data/weighted_collaboration_network.edgelist",
+                      nodetype=int, data=(("weight", float),))
 
 
 # read author similarity graph
-SG = nx.read_multiline_adjlist("../data/author_similarity_network.adjlist", nodetype=int)
+SG = nx.read_multiline_adjlist(
+    "../data/author_similarity_network.adjlist", nodetype=int)
 
 
 nodes = {k: v for v, k in enumerate(list(G.nodes()))}
@@ -71,7 +74,8 @@ f.close()
 
 
 # load Node2Vec embeddings obtained from WG
-node2vec_wg = KeyedVectors.load_word2vec_format('../data/node2vec_wg.nodevectors')
+node2vec_wg = KeyedVectors.load_word2vec_format(
+    '../data/node2vec_wg.nodevectors')
 
 
 # load Node2Vec embeddings obtained from SG
@@ -90,12 +94,14 @@ n2v_wpg = n2v_wpg.rename(columns={0: "authorID"})
 
 
 # read embeddings of abstracts obtained with Doc2Vec PV-DM
-text_embeddings_dm = pd.read_csv("../data/author_embedding_64_dm.csv", header=None)
+text_embeddings_dm = pd.read_csv(
+    "../data/author_embedding_64_dm.csv", header=None)
 text_embeddings_dm = text_embeddings_dm.rename(columns={0: "authorID"})
 
 
 # read embeddings of abstractsobtained with Doc2Vec PV-DBOW
-text_embeddings_dbow = pd.read_csv("../data/author_embedding_64_dbow.csv", header=None)
+text_embeddings_dbow = pd.read_csv(
+    "../data/author_embedding_64_dbow.csv", header=None)
 text_embeddings_dbow = text_embeddings_dbow.rename(columns={0: "authorID"})
 
 
@@ -111,88 +117,94 @@ n_dim = 64
 
 
 # create the training matrix. each node is represented as a vector of features:
-# (1-2-3) its degree, (4-5-6) the average degree of its neighbors, 
-# (7) its core number, (8-9-10) its page rank, (11-12) its betweenness centrality, 
+# (1-2-3) its degree, (4-5-6) the average degree of its neighbors,
+# (7) its core number, (8-9-10) its page rank, (11-12) its betweenness centrality,
 # (13-14) its clustering coefficient, (15) its eigenvector centrality,
 # (16) the number of written papers (cited), (17) the average number of written papers of its neighbors/coauthors,
 # (18-19-20-21) embeddings from Node2Vec, (22-23) text_embeddings from Doc2Vec
 X_train = np.zeros((n_train, 17+6*n_dim))
 y_train = np.zeros(n_train)
-for i,row in df_train.iterrows():
+for i, row in df_train.iterrows():
     node = int(row['authorID'])
     index = nodes[node]
-    X_train[i,0] = G.degree(node)
-    X_train[i,1] = WG.degree(node)
-    X_train[i,2] = SG.degree(node)
-    X_train[i,3] = avg_neighbor_degree_g[node]
-    X_train[i,4] = avg_neighbor_degree_wg[node]
-    X_train[i,5] = avg_neighbor_degree_sg[node]
-    X_train[i,6] = core_number_g[node]
-    X_train[i,7] = page_rank_g[node]
-    X_train[i,8] = page_rank_wg[node]
-    X_train[i,9] = page_rank_sg[node]
-    X_train[i,10] = betweenness_centrality_g[node]
-    X_train[i,11] = betweenness_centrality_wg[node]
-    X_train[i,12] = clustering_wg[node]
-    X_train[i,13] = clustering_sg[node]
-    X_train[i,14] = eigenvector_centrality_sg[node]
-    X_train[i,15] = n_papers[node]
-    X_train[i,16] = average_coauthors_n_papers[node]
-    X_train[i,17:17+n_dim] = n2v_pg[n2v_pg["authorID"] == node].iloc[:,1:]
-    X_train[i,17+n_dim:17+2*n_dim] = n2v_wpg[n2v_wpg["authorID"] == node].iloc[:,1:]
-    X_train[i,17+2*n_dim:17+3*n_dim] = n2v_sg[n2v_sg["authorID"] == node].iloc[:,1:]
-    X_train[i,17+3*n_dim:17+4*n_dim] = node2vec_wg[str(node)]
-    X_train[i,17+4*n_dim:17+5*n_dim] = text_embeddings_dm[text_embeddings_dm["authorID"] == node].iloc[:,1:]
-    X_train[i,17+5*n_dim:] = text_embeddings_dbow[text_embeddings_dbow["authorID"] == node].iloc[:,1:]
+    X_train[i, 0] = G.degree(node)
+    X_train[i, 1] = WG.degree(node)
+    X_train[i, 2] = SG.degree(node)
+    X_train[i, 3] = avg_neighbor_degree_g[node]
+    X_train[i, 4] = avg_neighbor_degree_wg[node]
+    X_train[i, 5] = avg_neighbor_degree_sg[node]
+    X_train[i, 6] = core_number_g[node]
+    X_train[i, 7] = page_rank_g[node]
+    X_train[i, 8] = page_rank_wg[node]
+    X_train[i, 9] = page_rank_sg[node]
+    X_train[i, 10] = betweenness_centrality_g[node]
+    X_train[i, 11] = betweenness_centrality_wg[node]
+    X_train[i, 12] = clustering_wg[node]
+    X_train[i, 13] = clustering_sg[node]
+    X_train[i, 14] = eigenvector_centrality_sg[node]
+    X_train[i, 15] = n_papers[node]
+    X_train[i, 16] = average_coauthors_n_papers[node]
+    X_train[i, 17:17+n_dim] = n2v_pg[n2v_pg["authorID"] == node].iloc[:, 1:]
+    X_train[i, 17+n_dim:17+2 *
+            n_dim] = n2v_wpg[n2v_wpg["authorID"] == node].iloc[:, 1:]
+    X_train[i, 17+2*n_dim:17+3 *
+            n_dim] = n2v_sg[n2v_sg["authorID"] == node].iloc[:, 1:]
+    X_train[i, 17+3*n_dim:17+4*n_dim] = node2vec_wg[str(node)]
+    X_train[i, 17+4*n_dim:17+5 *
+            n_dim] = text_embeddings_dm[text_embeddings_dm["authorID"] == node].iloc[:, 1:]
+    X_train[i, 17+5*n_dim:] = text_embeddings_dbow[text_embeddings_dbow["authorID"]
+                                                   == node].iloc[:, 1:]
     y_train[i] = row['h_index']
 
 
 # create the testing matrix. each node is represented as a vector of features:
-# (1-2-3) its degree, (4-5-6) the average degree of its neighbors, 
-# (7) its core number, (8-9-10) its page rank, (11-12) its betweenness centrality, 
+# (1-2-3) its degree, (4-5-6) the average degree of its neighbors,
+# (7) its core number, (8-9-10) its page rank, (11-12) its betweenness centrality,
 # (13-14) its clustering coefficient, (15) its eigenvector centrality,
 # (16) the number of written papers (cited), (17) the average number of written papers of its neighbors/coauthors,
 # (18-19-20-21) embeddings from Node2Vec, (22-23) text_embeddings from Doc2Vec
 X_test = np.zeros((n_test, 17+6*n_dim))
-for i,row in df_test.iterrows():
+for i, row in df_test.iterrows():
     node = int(row['authorID'])
     index = nodes[node]
-    X_test[i,0] = G.degree(node)
-    X_test[i,1] = WG.degree(node)
-    X_test[i,2] = SG.degree(node)
-    X_test[i,3] = avg_neighbor_degree_g[node]
-    X_test[i,4] = avg_neighbor_degree_wg[node]
-    X_test[i,5] = avg_neighbor_degree_sg[node]
-    X_test[i,6] = core_number_g[node]
-    X_test[i,7] = page_rank_g[node]
-    X_test[i,8] = page_rank_wg[node]
-    X_test[i,9] = page_rank_sg[node]
-    X_test[i,10] = betweenness_centrality_g[node]
-    X_test[i,11] = betweenness_centrality_wg[node]
-    X_test[i,12] = clustering_wg[node]
-    X_test[i,13] = clustering_sg[node]
-    X_test[i,14] = eigenvector_centrality_sg[node]
-    X_test[i,15] = n_papers[node]
-    X_test[i,16] = average_coauthors_n_papers[node]
-    X_test[i,17:17+n_dim] = n2v_pg[n2v_pg["authorID"] == node].iloc[:,1:]
-    X_test[i,17+n_dim:17+2*n_dim] = n2v_wpg[n2v_wpg["authorID"] == node].iloc[:,1:]
-    X_test[i,17+2*n_dim:17+3*n_dim] = n2v_sg[n2v_sg["authorID"] == node].iloc[:,1:]
-    X_test[i,17+3*n_dim:17+4*n_dim] = node2vec_wg[str(node)]
-    X_test[i,17+4*n_dim:17+5*n_dim] = text_embeddings_dm[text_embeddings_dm["authorID"] == node].iloc[:,1:]
-    X_test[i,17+5*n_dim:] = text_embeddings_dbow[text_embeddings_dbow["authorID"] == node].iloc[:,1:]
+    X_test[i, 0] = G.degree(node)
+    X_test[i, 1] = WG.degree(node)
+    X_test[i, 2] = SG.degree(node)
+    X_test[i, 3] = avg_neighbor_degree_g[node]
+    X_test[i, 4] = avg_neighbor_degree_wg[node]
+    X_test[i, 5] = avg_neighbor_degree_sg[node]
+    X_test[i, 6] = core_number_g[node]
+    X_test[i, 7] = page_rank_g[node]
+    X_test[i, 8] = page_rank_wg[node]
+    X_test[i, 9] = page_rank_sg[node]
+    X_test[i, 10] = betweenness_centrality_g[node]
+    X_test[i, 11] = betweenness_centrality_wg[node]
+    X_test[i, 12] = clustering_wg[node]
+    X_test[i, 13] = clustering_sg[node]
+    X_test[i, 14] = eigenvector_centrality_sg[node]
+    X_test[i, 15] = n_papers[node]
+    X_test[i, 16] = average_coauthors_n_papers[node]
+    X_test[i, 17:17+n_dim] = n2v_pg[n2v_pg["authorID"] == node].iloc[:, 1:]
+    X_test[i, 17+n_dim:17+2*n_dim] = n2v_wpg[n2v_wpg["authorID"] == node].iloc[:, 1:]
+    X_test[i, 17+2*n_dim:17+3*n_dim] = n2v_sg[n2v_sg["authorID"] == node].iloc[:, 1:]
+    X_test[i, 17+3*n_dim:17+4*n_dim] = node2vec_wg[str(node)]
+    X_test[i, 17+4*n_dim:17+5 *
+           n_dim] = text_embeddings_dm[text_embeddings_dm["authorID"] == node].iloc[:, 1:]
+    X_test[i, 17+5*n_dim:] = text_embeddings_dbow[text_embeddings_dbow["authorID"]
+                                                  == node].iloc[:, 1:]
 
 
 # Model 1
 reg = LGBMRegressor(objective='mae',
                     boosting_type='dart',
-                    colsample_bytree = 0.9365930147015064,
-                    learning_rate = 0.08882564114326925,
-                    max_depth = 10,
-                    n_estimators = 100000,
-                    num_leaves = 32,
-                    reg_alpha = 0.7886706622516692,
-                    reg_lambda = 0.9610000982102748,
-                    subsample = 0.9044671893327269, 
+                    colsample_bytree=0.9365930147015064,
+                    learning_rate=0.08882564114326925,
+                    max_depth=10,
+                    n_estimators=100000,
+                    num_leaves=32,
+                    reg_alpha=0.7886706622516692,
+                    reg_lambda=0.9610000982102748,
+                    subsample=0.9044671893327269,
                     n_jobs=1)
 
 
@@ -205,7 +217,7 @@ reg = LGBMRegressor(objective='mae',
 #                        num_leaves = 32,
 #                        reg_alpha = 0.789679180967437,
 #                        reg_lambda = 0.3377356252520094,
-#                        subsample = 0.9865966548486782, 
+#                        subsample = 0.9865966548486782,
 #                        n_jobs=1)
 
 
@@ -232,4 +244,5 @@ for i in range(len(X_test)):
 
 # write the predictions to file
 df_test['h_index_pred'].update(pd.Series(np.round_(y_pred, decimals=3)))
-df_test.loc[:,["authorID","h_index_pred"]].to_csv('../data/test_predictions.csv', index=False)
+df_test.loc[:, ["authorID", "h_index_pred"]].to_csv(
+    '../data/test_predictions.csv', index=False)
