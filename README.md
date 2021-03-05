@@ -33,9 +33,15 @@ The main purprose of this project is to predict the h-index given:
 
 
 # Getting started
+## Requirements
+
+To install the requirements, run at the root folder:
+
+> ```pip install -r requirements.txt```
+
 ## Required files
 
-Before running the model it is advisable to download some files necessary for its execution. This will save you time since the creation of networks and the extraction of some features is very slow. To download the data, you can run:
+Before running the model it is advisable to download some files necessary for its execution. This will save you time since the creation of networks and the extraction of some features is very slow. To download the data, you can run at the root older:
 
 > ```python get_data.py --precomputed PRECOMPUTED```
  
@@ -49,7 +55,7 @@ Once downloaded, deposit these files in the ```data``` folder.
 
 ## Run our model
 
-To execute our model you have to run the following line in the "code" folder.
+To execute our model you have to run the following line in the ```code``` folder.
 
 > ```python model.py```
 
