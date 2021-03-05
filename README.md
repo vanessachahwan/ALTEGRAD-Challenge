@@ -11,7 +11,7 @@
 
 # Description
 The treatment of data structures such as graphs and text is a long and complex process considering that there are several methods to extract features fromthem and that it is not easy to know which of theseare suitable for a subsequent task such as classification or regression.
-In this repository we will show our methods to extract features  made  in  our  H-index  prediction  process. We will also show the rest of the prediction chain such as regression and post processing. Finally, this treatment allowed us to be in 2nd place on the public leaderboard with a difference of 0.028 in score from the first place.
+In this repository we will show our methods to extract features  made  in  our  H-index  prediction  process. We will also show the rest of the prediction chain such as regression and post processing. Finally, this treatment allowed us to be in 2nd place on the public and private leaderboard with a difference of 0.011 in score from the first place in the private leaderboard.
 
 # Project's goal
 
@@ -35,32 +35,21 @@ The main purprose of this project is to predict the h-index given:
 # Getting started
 ## Required files
 
-Before running the model it is advisable to download some files necessary for its execution. This will save you time since the creation of networks and the extraction of some features is very slow. Here is the download link:
+Before running the model it is advisable to download some files necessary for its execution. This will save you time since the creation of networks and the extraction of some features is very slow. To download the data, you can run:
+
+> ```python get_data.py --precomputed PRECOMPUTED```
+ 
+with PRECOMPUTED taking the value 0 if you can want to execute all the scripts from scratch and 1 if you can to use the precomputed files.
+
+Or you can manually download them using the following download link:
 
 > www.kaggle.com/dataset/def482c59cd5a8ec65e48fef7a67002640d742dfd0e8a389b86421e28356171a
 
-Once downloaded, deposit these files in the ```/data/``` folder.
+Once downloaded, deposit these files in the ```data``` folder.
 
 ## Run our model
 
 To execute our model you have to run the following line in the "code" folder.
-
-
-> ```python paper_representations.py```
-
-> ```python author_representations.py```
-
-> ```python create_graphs.py```
-
-> ```python papers_features.py```
-
-> ```python graph_features.py```
-
-> ```python node2vec.py```
-
-> ```python author_node2vec.py```
-
-> ```python preprocessing_node2vec.py```
 
 > ```python model.py```
 
