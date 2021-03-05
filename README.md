@@ -41,13 +41,13 @@ To install the requirements, run at the root folder:
 
 ## Required files
 
-Before running the model it is advisable to download some files necessary for its execution. This will save you time since the creation of networks and the extraction of some features is very slow. To download the data, you can run at the root older:
+Before running the model it is advisable to download some files necessary for its execution. This will save you time since the creation of networks and the extraction of some features is very slow. To download the data, you can run at the root folder:
 
 > ```python get_data.py --precomputed PRECOMPUTED```
  
-with PRECOMPUTED taking the value 0 if you can want to execute all the scripts from scratch and 1 if you can to use the precomputed files.
+with PRECOMPUTED taking the value 0 if you want to execute all the scripts from scratch and 1 if you want to download the precomputed files.
 
-Or you can manually download them using the following download link:
+Or you can manually download the precomputed files using the following download link:
 
 > www.kaggle.com/dataset/def482c59cd5a8ec65e48fef7a67002640d742dfd0e8a389b86421e28356171a
 
@@ -58,8 +58,6 @@ Once downloaded, deposit these files in the ```data``` folder.
 To execute our model you have to run the following line in the ```code``` folder.
 
 > ```python model.py```
-
-**If you have downloaded the files from the previous step you only need to execute the last command, the rest is no longer necessary.**
 
 <p align="center">
   <img src="https://grandes-ecoles.studyrama.com/sites/default/files/styles/content/public/institut-polytechnique-de-paris.jpeg?itok=_Puxulb6" width="300" title="altegrad challenge">
