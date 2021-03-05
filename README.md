@@ -10,8 +10,8 @@
 </p>
 
 # Description
-The treatment of data structures such as graphs and text is a long and complex process considering that there are several methods to extract features fromthem and that it is not easy to know which of theseare suitable for a subsequent task such as classification or regression.
-In this repository we will show our methods to extract features  made  in  our  H-index  prediction  process. We will also show the rest of the prediction chain such as regression and post processing. Finally, this treatment allowed us to be in 2nd place on the public and private leaderboard with a difference of 0.011 in score from the first place in the private leaderboard.
+The treatment of data structures such as graphs and texts is a long and complex process considering that there are several methods to extract features from them and that it is not easy to know which of these are suitable for a subsequent task such as classification or regression.
+In this repository we will show our methods to extract features  made  in  our  H-index  prediction  process. We will also show the rest of the prediction chain such as regression and post-processing. Finally, this treatment allowed us to be in 2nd place on the public and private leaderboard with a difference of 0.011 in score from the first place in the private leaderboard.
 
 # Project's goal
 
